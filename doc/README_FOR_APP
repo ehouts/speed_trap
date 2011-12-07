@@ -1,2 +1,6 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+-- if a javascript runtime is reported as not present, try and load v8 javascript runtime:
+irb
+require 'v8'
+- if you see a permission error, you might need to setup selinux allow_execmode:
+sudo setsebool -P allow_execmod=1
+
