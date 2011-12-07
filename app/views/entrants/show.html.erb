@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @entrant.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @entrant.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @entrant.phone %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @entrant.number %>
+</p>
+
+<p>
+  <b>Vehicle class:</b>
+  <%= @entrant.vehicle_class_id %>
+</p>
+
+<p>
+  <b>Vehicle make:</b>
+  <%= @entrant.vehicle_make %>
+</p>
+
+<p>
+  <b>Vehicle model:</b>
+  <%= @entrant.vehicle_model %>
+</p>
+
+<p>
+  <b>Vehicle color:</b>
+  <%= @entrant.vehicle_color %>
+</p>
+
+
+<%= link_to 'Edit', edit_entrant_path(@entrant) %> |
+<%= link_to 'Back', entrants_path %>

@@ -1,4 +1,6 @@
 SpeedTrap::Application.routes.draw do
+  resources :entrants
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

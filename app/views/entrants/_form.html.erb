@@ -1,0 +1,49 @@
+<%= form_for(@entrant) do |f| %>
+  <% if @entrant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entrant.errors.count, "error") %> prohibited this entrant from being saved:</h2>
+
+      <ul>
+      <% @entrant.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.text_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle_class_id %><br />
+    <%= f.number_field :vehicle_class_id %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle_make %><br />
+    <%= f.text_field :vehicle_make %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle_model %><br />
+    <%= f.text_field :vehicle_model %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle_color %><br />
+    <%= f.text_field :vehicle_color %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
