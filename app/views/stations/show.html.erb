@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @station.event_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @station.name %>
+</p>
+
+<p>
+  <b>Trap 1 name:</b>
+  <%= @station.trap_1_name %>
+</p>
+
+<p>
+  <b>Trap 2 name:</b>
+  <%= @station.trap_2_name %>
+</p>
+
+<p>
+  <b>Trap 3 name:</b>
+  <%= @station.trap_3_name %>
+</p>
+
+<p>
+  <b>Trap 4 name:</b>
+  <%= @station.trap_4_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_station_path(@station) %> |
+<%= link_to 'Back', stations_path %>

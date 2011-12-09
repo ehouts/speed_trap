@@ -1,0 +1,23 @@
+{
+  "keyboard_shortcut": "", 
+  "name": "will_paginate", 
+  "language": "JavaScript", 
+  "trigger_enabled": "0", 
+  "rank": "100", 
+  "trigger": "trigger_postopen", 
+  "value": [
+    "try {", 
+    "    var project = (Components.classes[\"@activestate.com/koToolbox2Service;1\"].getService().", 
+    "                       runningMacro.project);", 
+    "    ko.as_rails_macros.installPlugin(this, project,", 
+    "                                  'svn://errtheblog.com/svn/plugins/will_paginate');", 
+    "} catch(ex) {", 
+    "    alert(ex + \"\\n\");", 
+    "}", 
+    ""
+  ], 
+  "version": "1.0.7", 
+  "async": "0", 
+  "type": "macro", 
+  "icon": "chrome://famfamfamsilk/skin/icons/plugin.png"
+}

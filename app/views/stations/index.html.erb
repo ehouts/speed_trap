@@ -1,0 +1,33 @@
+<h1>Listing stations</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Name</th>
+    <th>Trap 1 name</th>
+    <th>Trap 2 name</th>
+    <th>Trap 3 name</th>
+    <th>Trap 4 name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stations.each do |station| %>
+  <tr>
+    <td><%= station.event_id %></td>
+    <td><%= station.name %></td>
+    <td><%= station.trap_1_name %></td>
+    <td><%= station.trap_2_name %></td>
+    <td><%= station.trap_3_name %></td>
+    <td><%= station.trap_4_name %></td>
+    <td><%= link_to 'Show', station %></td>
+    <td><%= link_to 'Edit', edit_station_path(station) %></td>
+    <td><%= link_to 'Destroy', station, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Station', new_station_path %>

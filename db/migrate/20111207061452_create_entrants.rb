@@ -9,8 +9,12 @@ class CreateEntrants < ActiveRecord::Migration
       t.string :vehicle_make
       t.string :vehicle_model
       t.string :vehicle_color
+      t.integer :event_id
 
       t.timestamps
     end
+    add_index :entrants, :event_id
+    add_index :entrants, [:event_id, :vehicle_class_id]
+      
   end
 end

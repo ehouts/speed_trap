@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @system_setting.event_id %>
+</p>
+
+<p>
+  <b>Min time diff:</b>
+  <%= @system_setting.min_time_diff %>
+</p>
+
+<p>
+  <b>Break time:</b>
+  <%= @system_setting.break_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_system_setting_path(@system_setting) %> |
+<%= link_to 'Back', system_settings_path %>

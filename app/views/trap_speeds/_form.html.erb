@@ -1,0 +1,41 @@
+<%= form_for(@trap_speed) do |f| %>
+  <% if @trap_speed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trap_speed.errors.count, "error") %> prohibited this trap_speed from being saved:</h2>
+
+      <ul>
+      <% @trap_speed.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.number_field :event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :station_id %><br />
+    <%= f.number_field :station_id %>
+  </div>
+  <div class="field">
+    <%= f.label :entrant_id %><br />
+    <%= f.number_field :entrant_id %>
+  </div>
+  <div class="field">
+    <%= f.label :capture_time %><br />
+    <%= f.time_select :capture_time %>
+  </div>
+  <div class="field">
+    <%= f.label :official_flag %><br />
+    <%= f.text_field :official_flag %>
+  </div>
+  <div class="field">
+    <%= f.label :trap_number %><br />
+    <%= f.number_field :trap_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

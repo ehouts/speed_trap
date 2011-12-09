@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="3db177c0-c157-4b49-a097-4ccccc3d71f5" kpf_version="5" name="package.komodoproject">
+<preference-set idref="3db177c0-c157-4b49-a097-4ccccc3d71f5">
+  <boolean id="import_live">1</boolean>
+  <string id="lastTestPlanName_pref">test:plugins</string>
+<preference-set id="testPlans">
+<preference-set id="test all">
+  <string id="command_line">rake test</string>
+  <string id="directory">file:///home/ericp/svn/apps/openkomodo/src/templates/raw/rails/</string>
+  <string id="language">Ruby - Rake tests</string>
+</preference-set>
+<preference-set id="test:functionals">
+  <string id="command_line">rake test:functionals</string>
+  <string id="directory">file:///home/ericp/svn/apps/openkomodo/src/templates/raw/rails/</string>
+  <string id="language">Ruby - Rake tests</string>
+</preference-set>
+<preference-set id="test:integration">
+  <string id="command_line">rake test:integration</string>
+  <string id="directory">file:///home/ericp/svn/apps/openkomodo/src/templates/raw/rails/</string>
+  <string id="language">Ruby - Rake tests</string>
+</preference-set>
+<preference-set id="test:plugins">
+  <string id="command_line">rake test:plugins</string>
+  <string id="directory">file:///home/ericp/svn/apps/openkomodo/src/templates/raw/rails/</string>
+  <string id="language">Ruby - Rake tests</string>
+</preference-set>
+<preference-set id="test:units">
+  <string id="command_line">rake test:units</string>
+  <string id="directory">file:///home/ericp/svn/apps/openkomodo/src/templates/raw/rails/</string>
+  <string id="language">Ruby - Rake tests</string>
+</preference-set>
+</preference-set>
+</preference-set>
+</project>

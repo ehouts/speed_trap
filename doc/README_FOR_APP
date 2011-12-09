@@ -4,3 +4,74 @@ require 'v8'
 - if you see a permission error, you might need to setup selinux allow_execmode:
 sudo setsebool -P allow_execmod=1
 
+git commands:
+.gitignore has files to not check into git
+git init
+git add .
+git commit -am "initial commit"
+git remote add origin git@github.com:ehouts/speed_trap.git
+git push -u origin master
+git add .
+git push -u origin master
+git commit
+git push -u origin master
+
+creation example :
+rails generate scaffold Entrant name:string email:string phone:string number:string vehicle_class_id:integer vehicle_make:string vehicle_model:string vehicle_color:string event_id:integer
+
+only min_time_diff is used currently...I think that's all that's necessary...
+
+Design
+SystemSettings
+ event_id
+ min_time_diff - min difference between two times on 1 station.  times closer than this are ignored.
+ break_time - this # of seconds after a time moves the 'current' station speed to the next slot (not a dup)
+ 
+Events
+ name
+ event_date
+
+Entrants
+ event_id
+ name
+ email
+ phone
+ number
+ vehicle_class_id
+ vehicle_make
+ vehicle_model
+ vehicle_color
+
+Users
+ name
+ email
+ password
+ user_type_id
+
+UserTypes
+ name
+ user_level
+ 
+VehicleClasses
+ event_id
+ name
+ max_speed
+ 
+Stations
+ event_id
+ name
+ trap_1_name
+ trap_2_name
+ trap_3_name
+ trap_4_name
+
+TrapSpeeds
+ event_id
+ station_id
+ entrant_id
+ capture_time
+ official_flag - only set once per station/entrant/trap_number.  Should be first valid time in the window
+ trap_number - 1-4, indicates which trap at a station the time was recorded for
+ 
+ 
+ 

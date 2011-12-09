@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @trap_speed.event_id %>
+</p>
+
+<p>
+  <b>Station:</b>
+  <%= @trap_speed.station_id %>
+</p>
+
+<p>
+  <b>Entrant:</b>
+  <%= @trap_speed.entrant_id %>
+</p>
+
+<p>
+  <b>Capture time:</b>
+  <%= @trap_speed.capture_time %>
+</p>
+
+<p>
+  <b>Official flag:</b>
+  <%= @trap_speed.official_flag %>
+</p>
+
+<p>
+  <b>Trap number:</b>
+  <%= @trap_speed.trap_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_trap_speed_path(@trap_speed) %> |
+<%= link_to 'Back', trap_speeds_path %>

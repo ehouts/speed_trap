@@ -1,4 +1,18 @@
 SpeedTrap::Application.routes.draw do
+  resources :user_types
+
+  resources :users
+
+  resources :trap_speeds
+
+  resources :stations
+
+  resources :vehicle_classes
+
+  resources :system_settings
+
+  resources :events
+
   resources :entrants
 
   # The priority is based upon order of creation:

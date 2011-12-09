@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @vehicle_class.event_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @vehicle_class.name %>
+</p>
+
+<p>
+  <b>Max speed:</b>
+  <%= @vehicle_class.max_speed %>
+</p>
+
+
+<%= link_to 'Edit', edit_vehicle_class_path(@vehicle_class) %> |
+<%= link_to 'Back', vehicle_classes_path %>

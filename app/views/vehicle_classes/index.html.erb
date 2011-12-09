@@ -1,0 +1,27 @@
+<h1>Listing vehicle_classes</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Name</th>
+    <th>Max speed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vehicle_classes.each do |vehicle_class| %>
+  <tr>
+    <td><%= vehicle_class.event_id %></td>
+    <td><%= vehicle_class.name %></td>
+    <td><%= vehicle_class.max_speed %></td>
+    <td><%= link_to 'Show', vehicle_class %></td>
+    <td><%= link_to 'Edit', edit_vehicle_class_path(vehicle_class) %></td>
+    <td><%= link_to 'Destroy', vehicle_class, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vehicle class', new_vehicle_class_path %>

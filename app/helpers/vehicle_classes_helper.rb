@@ -1,0 +1,2 @@
+module VehicleClassesHelper
+end
