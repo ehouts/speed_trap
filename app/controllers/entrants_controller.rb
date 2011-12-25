@@ -1,8 +1,16 @@
 class EntrantsController < ApplicationController
+  before_filter :only => [:destroy, :edit, :new] do |c|
+    c.send(:user_authorized?, :edit_entrants)
+  end
+
+  before_filter :event_selected?
+  
   # GET /entrants
   # GET /entrants.json
   def index
-    @entrants = Entrant.all
+    event_id = current_event.id
+    event_id = params[:event_id] if params.has_key?(:event_id)
+    @entrants = Entrant.all(:conditions => "event_id = #{event_id}")
 
     respond_to do |format|
       format.html # index.html.erb

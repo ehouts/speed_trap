@@ -2,7 +2,11 @@
 
 <p>
   <b>Event:</b>
-  <%= @system_setting.event_id %>
+  <% if @system_setting.event_id != nil  and @system_setting.event.name != nil %>
+    <%= @system_setting.event.name %>
+  <% else %>
+    Please select a valid Event
+  <% end %>
 </p>
 
 <p>

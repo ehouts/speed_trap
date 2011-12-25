@@ -1,20 +1,22 @@
 class SystemSettingsController < ApplicationController
+  before_filter :except => :index do |c|
+    c.send(:user_authorized?, :edit_system_settings)
+  end
+
   # GET /system_settings
   # GET /system_settings.json
+  # This is the home page, as there is only a single system setting
   def index
-    @system_settings = SystemSetting.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @system_settings }
     end
   end
 
   # GET /system_settings/1
   # GET /system_settings/1.json
   def show
-    @system_setting = SystemSetting.find(params[:id])
-
+    @system_setting = SystemSetting.first
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @system_setting }
@@ -34,7 +36,7 @@ class SystemSettingsController < ApplicationController
 
   # GET /system_settings/1/edit
   def edit
-    @system_setting = SystemSetting.find(params[:id])
+    @system_setting = SystemSetting.first
   end
 
   # POST /system_settings

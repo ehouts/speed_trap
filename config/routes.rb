@@ -1,7 +1,10 @@
 SpeedTrap::Application.routes.draw do
-  resources :user_types
+  devise_for :users
+  devise_scope :user do
+    get "/login" => "devise/sessions#new"
+    get "/logout" => "devise/sessions#destroy"
+  end
 
-  resources :users
 
   resources :trap_speeds
 
@@ -15,6 +18,9 @@ SpeedTrap::Application.routes.draw do
 
   resources :entrants
 
+
+  root :to => 'system_settings#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

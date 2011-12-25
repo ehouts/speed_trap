@@ -1,0 +1,90 @@
+table {
+  border: 3px solid black;
+  padding: 3px;
+  background-color: #8d8d8d;
+}
+
+table.rack_bay {
+  border: 3px double black;
+  padding: 4px;
+  background-color: #afafaf;
+}
+table.none {
+  border: 0px;
+  padding: 0px;
+  background-color: #f7f7f7;
+}
+
+td.test_rack_bay_container {
+  border: 2px inset gray;
+  padding: 3px;
+}
+
+th {
+  #border-bottom: 2px solid black;
+  font-weight: bolder;
+  font-size: 14px;
+  color: #ffffdd;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+
+td {
+  background-color: #fafafa;
+  border-bottom: 2px solid black;
+  border-right: 1px solid black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+td.none {
+  background-color: #fafafa;
+  border-bottom: 0px;
+  border-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+td.total {
+  text-align: center;
+}
+td.pass {
+  background-color: #00ee00;
+  text-align: center;
+}
+td.fail {
+  background-color: #ff5555;
+  text-align: center;
+}
+td.unknown {
+  background-color: #aaaaff;
+  text-align: center;
+}
+td.not_run {
+  background-color: #ff99ff;
+  text-align: center;
+}
+td.exception {
+  background-color: #fefe00;
+  text-align: center;
+}
+
+tdr {
+  text-align: right;
+}
+
+caption {
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: center;
+  font:bold 20px Arial, Helvetica, sans-serif, italic;
+}

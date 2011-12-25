@@ -1,8 +1,17 @@
 class StationsController < ApplicationController
+  before_filter do |c|
+    c.send(:user_authorized?, :edit_stations)
+  end
+
+  before_filter :event_selected?
+   
   # GET /stations
   # GET /stations.json
   def index
-    @stations = Station.all
+    event_id = current_event.id
+    event_id = params[:event_id] if params.has_key?(:event_id)
+    
+    @stations = Station.all(:conditions => "event_id = #{event_id}")
 
     respond_to do |format|
       format.html # index.html.erb

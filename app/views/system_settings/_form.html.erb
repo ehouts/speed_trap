@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :event_id %><br />
-    <%= f.number_field :event_id %>
+    <%= f.label :event %><br />
+    <%= select("system_setting", "event_id", Event.all(:order => "event_date DESC").collect {|e| [ "#{e.name} : #{e.event_date}", e.id] }) %>
   </div>
   <div class="field">
     <%= f.label :min_time_diff %><br />

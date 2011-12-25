@@ -1,8 +1,16 @@
 class TrapSpeedsController < ApplicationController
+  before_filter do |c|
+    c.send(:user_authorized?, :edit_trap_speeds)
+  end
+
+  before_filter :event_selected? 
+
   # GET /trap_speeds
   # GET /trap_speeds.json
   def index
-    @trap_speeds = TrapSpeed.all
+    event_id = current_event.id
+    event_id = params[:event_id] if params.has_key?(:event_id)
+    @trap_speeds = TrapSpeed.all(:conditions => "event_id = #{event_id}")
 
     respond_to do |format|
       format.html # index.html.erb

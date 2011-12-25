@@ -1,4 +1,12 @@
 class EventsController < ApplicationController
+  before_filter :only => [:destroy, :edit, :new] do |c|
+    c.send(:user_authorized?, :edit_events)
+  end
+  
+  before_filter do |c|
+    c.send(:user_authorized?, :display_events)
+  end
+   
   # GET /events
   # GET /events.json
   def index
