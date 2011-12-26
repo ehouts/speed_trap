@@ -86,7 +86,7 @@
   <% end %>
   <br />
   <% unless flash[:error].blank? %>
-    <div class="errorExplanation"><%= flash[:error] %></div>
+    <div id="errorExplanation"><%= flash[:error] %></div>
   <% end %>
 
   <% unless flash[:notice].blank? %>

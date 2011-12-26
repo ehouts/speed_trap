@@ -43,7 +43,7 @@ class TrapSpeedsController < ApplicationController
   # GET /trap_speeds/1/edit
   def edit
     @trap_speed = TrapSpeed.find(params[:id])
-    if current_event == nil or @trap_speed.event != current_event.name
+    if current_event == nil or @trap_speed.event != current_event
       flash[:error] = "Attempting to edit trap speed from a different event (#{@trap_speed.event.name})"
       redirect_to root_url
       return

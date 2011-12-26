@@ -43,6 +43,12 @@ class VehicleClassesController < ApplicationController
   # GET /vehicle_classes/1/edit
   def edit
     @vehicle_class = VehicleClass.find(params[:id])
+
+    if current_event == nil or @vehicle_class.event != current_event
+      flash[:error] = "Attempting to edit a vehicle class from a different event (#{@vehicle_class.event.name})"
+      redirect_to root_url
+      return
+    end
   end
 
   # POST /vehicle_classes
