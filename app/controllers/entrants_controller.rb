@@ -43,7 +43,8 @@ class EntrantsController < ApplicationController
   # GET /entrants/1/edit
   def edit
     @entrant = Entrant.find(params[:id])
-    if current_event == nil or @entrant.event != current_event.name
+
+    if current_event == nil or @entrant.event != current_event
       flash[:error] = "Attempting to edit an Entrant from a different event (#{@entrant.event.name})"
       redirect_to root_url
       return
