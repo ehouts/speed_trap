@@ -1,8 +1,7 @@
-<h1>Listing vehicle_classes</h1>
+<h1>Listing Vehicle Classes for <%= @vehicle_classes.first.event.name if @vehicle_classes.length > 0 %></h1>
 
 <table>
   <tr>
-    <th>Event</th>
     <th>Name</th>
     <th>Max speed</th>
     <th></th>
@@ -12,7 +11,6 @@
 
 <% @vehicle_classes.each do |vehicle_class| %>
   <tr>
-    <td><%= vehicle_class.event_id %></td>
     <td><%= vehicle_class.name %></td>
     <td><%= vehicle_class.max_speed %></td>
     <td><%= link_to 'Show', vehicle_class %></td>

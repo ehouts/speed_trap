@@ -10,7 +10,7 @@ class VehicleClassesController < ApplicationController
   def index
     event_id = current_event.id
     event_id = params[:event_id] if params.has_key?(:event_id)
-    @vehicle_classes = VehicleClass.all(:conditions => "event_id = #{event_id}")
+    @vehicle_classes = VehicleClass.all(:conditions => "event_id = #{event_id}", :order => "max_speed ASC")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :event_id %><br />
-    <%= f.number_field :event_id %>
+    <%= f.label :event %><br />
+    <%= select("trap_speed", "event_id", [[ "#{current_event.name} : #{current_event.event_date}", current_event.id]] ) %>
   </div>
   <div class="field">
     <%= f.label :station_id %><br />

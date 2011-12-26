@@ -44,6 +44,11 @@ class StationsController < ApplicationController
   # GET /stations/1/edit
   def edit
     @station = Station.find(params[:id])
+    if current_event == nil or @station.event != current_event.name
+      flash[:error] = "Attempting to edit station from a different event (#{@station.event.name})"
+      redirect_to root_url
+      return
+    end
   end
 
   # POST /stations

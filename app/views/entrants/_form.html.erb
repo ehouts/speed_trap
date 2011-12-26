@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :event %><br />
+    <%= select("entrant", "event_id", [[ "#{current_event.name} : #{current_event.event_date}", current_event.id]] ) %>
+  </div>
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
@@ -28,8 +32,8 @@
     <%= f.text_field :number %>
   </div>
   <div class="field">
-    <%= f.label :vehicle_class_id %><br />
-    <%= f.number_field :vehicle_class_id %>
+    <%= f.label :event %><br />
+    <%= select("entrant", "vehicle_class_id", VehicleClass.all(:conditions => "event_id = #{current_event.id}", :order => "max_speed ASC").collect {|vc| [vc.print_name, vc.id]} ) %>
   </div>
   <div class="field">
     <%= f.label :vehicle_make %><br />

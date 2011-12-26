@@ -20,8 +20,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       return false
     end
-    
+
     def current_event
-      return SystemSetting.first
+      ss = SystemSetting.first
+      if ss != nil and ss.event_id != nil and ss.event.name != nil
+        return ss.event
+      end
+	  return nil
     end
 end
