@@ -40,3 +40,5 @@ gem "devise", ">= 1.4.9"
 gem "cucumber-rails", ">= 1.1.1", :group => :test
 gem "capybara", ">= 1.1.1", :group => :test
 
+# added to get periodically_call_remote in rails 3
+gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'

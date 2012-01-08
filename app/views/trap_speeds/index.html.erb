@@ -1,33 +1,34 @@
-<h1>Listing trap_speeds</h1>
+<h1>Trap Speeds</h1>
 
 <table>
   <tr>
-    <th>Event</th>
-    <th>Station</th>
+    <th>Trap</th>
     <th>Entrant</th>
+    <th>Speed (MPH)</th>
     <th>Capture time</th>
-    <th>Official flag</th>
-    <th>Trap number</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if current_user != nil and current_user.authorized?(:data_entry) %>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @trap_speeds.each do |trap_speed| %>
   <tr>
-    <td><%= trap_speed.event_id %></td>
-    <td><%= trap_speed.station_id %></td>
-    <td><%= trap_speed.entrant_id %></td>
-    <td><%= trap_speed.capture_time %></td>
-    <td><%= trap_speed.official_flag %></td>
-    <td><%= trap_speed.trap_number %></td>
-    <td><%= link_to 'Show', trap_speed %></td>
-    <td><%= link_to 'Edit', edit_trap_speed_path(trap_speed) %></td>
-    <td><%= link_to 'Destroy', trap_speed, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= trap_speed.station.name %></td>
+    <td><%= link_to(trap_speed.entrant.entrant_string, trap_speed.entrant) if trap_speed.entrant != nil %></td>
+    <td><%= trap_speed.speed %></td>
+    <td><%= trap_speed.capture_time_to_short_timestamp %></td>
+    <% if current_user != nil and current_user.authorized?(:data_entry) %>
+      <td><%= link_to 'Show', trap_speed %></td>
+      <td><%= link_to 'Edit', edit_trap_speed_path(trap_speed) %></td>
+      <td><%= link_to 'Destroy', trap_speed, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
-<br />
+<% if current_user != nil and current_user.authorized?(:data_entry) %>
+  <%= link_to 'New Trap speed', new_trap_speed_path %>
+<% end %>
 
-<%= link_to 'New Trap speed', new_trap_speed_path %>

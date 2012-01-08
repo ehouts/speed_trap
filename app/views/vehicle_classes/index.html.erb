@@ -4,22 +4,31 @@
   <tr>
     <th>Name</th>
     <th>Max speed</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Entrants</th>
+    <% if current_user != nil and current_user.authorized?(:data_entry) %>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @vehicle_classes.each do |vehicle_class| %>
   <tr>
-    <td><%= vehicle_class.name %></td>
+    <td><%= link_to vehicle_class.name, vehicle_class %></td>
     <td><%= vehicle_class.max_speed %></td>
-    <td><%= link_to 'Show', vehicle_class %></td>
-    <td><%= link_to 'Edit', edit_vehicle_class_path(vehicle_class) %></td>
-    <td><%= link_to 'Destroy', vehicle_class, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= vehicle_class.entrants.count %></td>
+    <% if current_user != nil and current_user.authorized?(:data_entry) %>
+      <td><%= link_to 'Show', vehicle_class %></td>
+      <td><%= link_to 'Edit', edit_vehicle_class_path(vehicle_class) %></td>
+      <td><%= link_to 'Destroy', vehicle_class, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Vehicle class', new_vehicle_class_path %>
+<% if current_user != nil and current_user.authorized?(:data_entry) %>
+  <%= link_to 'New Vehicle class', new_vehicle_class_path %>
+<% end %>
+

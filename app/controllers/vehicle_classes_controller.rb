@@ -23,6 +23,29 @@ class VehicleClassesController < ApplicationController
   def show
     @vehicle_class = VehicleClass.find(params[:id])
 
+    @trap_speeds = Array.new
+    temp_speeds = nil
+    @vehicle_class.entrants.each do |e|
+      if temp_speeds == nil
+        temp_speeds = e.trap_speeds
+      else
+        temp_speeds += e.trap_speeds
+      end
+    end
+    temp_speeds_2 = temp_speeds.sort {|a,b| a.speed <=> b.speed }.reverse
+    if params.has_key?(:display_type) and params[:display_type] == 'fastest_run'
+      entrant_ids = Array.new
+      temp_speeds_2.each do |ts|
+        next if entrant_ids.include?(ts.entrant.id)
+        @trap_speeds.push(ts)
+        entrant_ids.push(ts.entrant.id)
+      end
+    elsif params.has_key?(:display_type) and params[:display_type] == 'by_run_time'
+      @trap_speeds = temp_speeds_2.sort { |a,b| a.capture_time <=> b.capture_time }
+    else
+      @trap_speeds = temp_speeds_2
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @vehicle_class }

@@ -6,18 +6,24 @@ SpeedTrap::Application.routes.draw do
   end
 
 
+  match 'update_live_data' => 'trap_speeds#update_live_data'
+  match 'submit_speed_data' => 'trap_speeds#submit_speed_data'
   resources :trap_speeds
 
+  match 'update_run_data' => 'stations#update_run_data'
+  match 'update_trap' => 'stations#update_trap'
+  match 'update_on_deck' => 'stations#update_on_deck'
+  match 'update_trap_pending' => 'stations#update_trap_pending'
   resources :stations
 
   resources :vehicle_classes
 
   resources :system_settings
 
+  match 'live_data' => 'events#live_data'
   resources :events
 
   resources :entrants
-
 
   root :to => 'system_settings#index'
   

@@ -3,10 +3,19 @@ class EventsController < ApplicationController
     c.send(:user_authorized?, :edit_events)
   end
   
-  before_filter do |c|
+  before_filter :except => :live_data do |c|
     c.send(:user_authorized?, :display_events)
   end
    
+  def live_data
+    @data_type = 'live'
+    @data_type = params[:data_type] if params.has_key?(:data_type)
+    respond_to do |format|
+      format.html
+    end
+    
+  end
+
   # GET /events
   # GET /events.json
   def index

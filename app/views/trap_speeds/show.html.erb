@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Event:</b>
   <%= @trap_speed.event_id %>
@@ -13,6 +11,11 @@
 <p>
   <b>Entrant:</b>
   <%= @trap_speed.entrant_id %>
+</p>
+
+<p>
+  <b>Speed:</b>
+  <%= @trap_speed.speed %> MPH
 </p>
 
 <p>
@@ -31,5 +34,4 @@
 </p>
 
 
-<%= link_to 'Edit', edit_trap_speed_path(@trap_speed) %> |
 <%= link_to 'Back', trap_speeds_path %>

@@ -1,0 +1,23 @@
+<h1>
+  <% if @data_type == 'live' %>
+    Live Data
+  <% elsif @data_type == 'fastest_overall' %>
+    Fastest Overall
+  <% else %>
+    <%= @data_type.camelize %>
+  <% end %>
+</h1>
+
+<div id='live_data_div'>
+</div>
+
+  <script type='text/javascript'>
+updateLiveData();
+setInterval("updateLiveData()", 10000);
+function updateLiveData() {
+  $.get("/update_live_data?data_type=<%= @data_type %>",
+      function(response) {
+        $("#live_data_div").html(response);
+      });
+}
+  </script>

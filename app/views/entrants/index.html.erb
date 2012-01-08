@@ -3,35 +3,44 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
+    <% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+      <th>Email</th>
+      <th>Phone</th>
+    <% end %>
     <th>Number</th>
+    <th>Top Speed</th>
     <th>Vehicle class</th>
     <th>Vehicle make</th>
     <th>Vehicle model</th>
     <th>Vehicle color</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @entrants.each do |entrant| %>
   <tr>
-    <td><%= entrant.name %></td>
-    <td><%= entrant.email %></td>
-    <td><%= entrant.phone %></td>
-    <td><%= entrant.number %></td>
-    <td><%= entrant.vehicle_class_id %></td>
+    <td><%= link_to entrant.name, entrant %></td>
+    <% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+      <td><%= entrant.email %></td>
+      <td><%= entrant.phone %></td>
+    <% end %>
+    <td><%= link_to entrant.number, entrant %></td>
+    <td><%= entrant.top_speed %></td>
+    <td><%= link_to entrant.vehicle_class.print_name, entrant.vehicle_class %></td>
     <td><%= entrant.vehicle_make %></td>
     <td><%= entrant.vehicle_model %></td>
     <td><%= entrant.vehicle_color %></td>
-    <td><%= link_to 'Show', entrant %></td>
-    <td><%= link_to 'Edit', edit_entrant_path(entrant) %></td>
-    <td><%= link_to 'Destroy', entrant, confirm: 'Are you sure?', method: :delete %></td>
+    <% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+      <td><%= link_to 'Edit', edit_entrant_path(entrant) %></td>
+      <td><%= link_to 'Destroy', entrant, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Entrant', new_entrant_path %>
+<% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+  <%= link_to 'New Entrant', new_entrant_path %>
+<% end %>

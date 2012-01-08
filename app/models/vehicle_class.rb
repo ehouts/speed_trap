@@ -1,5 +1,5 @@
 class VehicleClass < ActiveRecord::Base
-  has_many :entrants
+  has_many :entrants, :include => :trap_speeds
   belongs_to :event
   
   validates :name, :uniqueness => { :scope => [:event_id] }

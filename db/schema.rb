@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111225005721) do
+ActiveRecord::Schema.define(:version => 20120108030506) do
 
   create_table "entrants", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20111225005721) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "past_award_speed", :default => false
   end
 
   add_index "entrants", ["event_id", "vehicle_class_id"], :name => "index_entrants_on_event_id_and_vehicle_class_id"
@@ -35,15 +36,21 @@ ActiveRecord::Schema.define(:version => 20111225005721) do
     t.date     "event_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "award_speed", :default => 999
   end
 
   create_table "stations", :force => true do |t|
     t.integer  "event_id"
     t.string   "name"
+    t.string   "station_code"
     t.string   "trap_1_name"
+    t.string   "trapid_1"
     t.string   "trap_2_name"
+    t.string   "trapid_2"
     t.string   "trap_3_name"
+    t.string   "trapid_3"
     t.string   "trap_4_name"
+    t.string   "trapid_4"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,11 +69,16 @@ ActiveRecord::Schema.define(:version => 20111225005721) do
     t.integer  "event_id"
     t.integer  "station_id"
     t.integer  "entrant_id"
-    t.time     "capture_time"
+    t.integer  "trapid"
+    t.integer  "trap_num"
+    t.decimal  "capture_time",  :precision => 16, :scale => 0
     t.boolean  "official_flag"
-    t.integer  "trap_number"
+    t.boolean  "dup_flag"
+    t.boolean  "invalid_flag"
+    t.decimal  "speed",         :precision => 16, :scale => 5
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "force_dnf",                                    :default => false
   end
 
   add_index "trap_speeds", ["event_id", "station_id", "entrant_id"], :name => "index_trap_speeds_on_event_id_and_station_id_and_entrant_id"

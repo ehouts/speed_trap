@@ -4,6 +4,10 @@ require 'v8'
 - if you see a permission error, you might need to setup selinux allow_execmode:
 sudo setsebool -P allow_execmod=1
 
+
+-- submitting data :
+D:\time_apps\TimeKeeper.with_speed_trap\TimeKeeper>cscript web_insert.vbs 1234567890 152.8
+
 git commands:
 .gitignore has files to not check into git
 git init

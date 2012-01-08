@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
     end
     
     def event_selected?
-      ss = SystemSetting.first
-      if ss != nil and ss.event_id != nil and ss.event.name != nil
+      if system_setting != nil and system_setting.event_id != nil and system_setting.event.name != nil
         return true
       end
       flash[:notice] = "A valid Event must be selected first"
@@ -22,10 +21,13 @@ class ApplicationController < ActionController::Base
     end
 
     def current_event
-      ss = SystemSetting.first
-      if ss != nil and ss.event_id != nil and ss.event.name != nil
-        return ss.event
+      if system_setting != nil and system_setting.event_id != nil and system_setting.event.name != nil
+        return system_setting.event
       end
 	  return nil
+    end
+    
+    def system_setting
+      SystemSetting.first
     end
 end

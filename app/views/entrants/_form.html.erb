@@ -47,6 +47,10 @@
     <%= f.label :vehicle_color %><br />
     <%= f.text_field :vehicle_color %>
   </div>
+  <div class="field">
+    <%= f.label :past_award_speed %> - indicates entrant has achieved this at a previous event<br />
+    <%= f.check_box :past_award_speed %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

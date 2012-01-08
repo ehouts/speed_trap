@@ -1,35 +1,99 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @station.name %></h1>
 
-<p>
-  <b>Event:</b>
-  <%= @station.event.name %>
-</p>
+<% default_entrant_id = String.new %>
+<% default_entrant_id = @entrant_on_deck.id if @entrant_on_deck != nil %>
+<% default_entrant_number = String.new %>
+<% default_entrant_number = @entrant_on_deck.number if @entrant_on_deck != nil %>
+<% if @station.trap_1_name.length > 0 %>
+  <% trap_num = 1 %>
+  <font style='font-size:larger'><b>Trap 1: <%= @station.trap_1_name %></b></font><div style='float:right' id='trap_1_pending_div'></div><br />
+  <div id='trap_1_div'>
+    <br>
+  </div>
+  
+  <script type='text/javascript'>
+updateTrap1("<%= @station.id %>", "<%= trap_num %>", "<%= default_entrant_id %>");
+// setInterval is performed in the partial
+var updateTrap1Id = 0;
+function updateTrap1(stationid, trapnum, ondeck) {
+  $.get("/update_trap?id=" + stationid + "&trap_num=" + trapnum + "&on_deck_id=" + ondeck,
+      function(response) {
+        $("#trap_" + trapnum + "_div").html(response);
+      });
+}
+updateTrap1Pending("<%= @station.id %>", "<%= trap_num %>");
+setInterval("updateTrap1Pending('<%= @station.id %>', '<%= trap_num %>')", 5000);
+function updateTrap1Pending(stationid, trapnum) {
+  $.get("/update_trap_pending?id=" + stationid + "&trap_num=" + trapnum,
+      function(response) {
+        $("#trap_" + trapnum + "_pending_div").html(response);
+      });
+}
 
-<p>
-  <b>Name:</b>
-  <%= @station.name %>
-</p>
+  </script>
 
-<p>
-  <b>Trap 1 name:</b>
-  <%= @station.trap_1_name %>
-</p>
+<% end %>
 
-<p>
-  <b>Trap 2 name:</b>
-  <%= @station.trap_2_name %>
-</p>
+<% if @station.trap_2_name.length > 0 %>
+  <div id='trap_2_div'>  
+    <p>
+      <b>Trap 2 name:</b>
+      <%= @station.trap_2_name %><br>
+      <b>Trap 2 ID:</b>
+      <%= @station.trapid_2 %>
+    </p>
+  </div>
+<% end %>
+<% if @station.trap_3_name.length > 0 %>
+  <div id='trap_3_div'>  
+    <p>
+      <b>Trap 3 name:</b>
+      <%= @station.trap_3_name %><br>
+      <b>Trap 3 ID:</b>
+      <%= @station.trapid_3 %>
+    </p>
+  </div>
+<% end %>
+<% if @station.trap_4_name.length > 0 %>
+  <div id='trap_4_div'>    
+    <p>
+      <b>Trap 4 name:</b>
+      <%= @station.trap_4_name %><br>
+      <b>Trap 4 ID:</b>
+      <%= @station.trapid_4 %>
+    </p>
+  </div>
+<% end %>
 
-<p>
-  <b>Trap 3 name:</b>
-  <%= @station.trap_3_name %>
-</p>
+<div id='on_deck_div'>
+  <%= form_tag "/update_on_deck", :remote => true  %>
+  &nbsp;&nbsp;Vehicle # On Deck: <%= text_field_tag "on_deck_entrant", default_entrant_number, :size => 15 %>
+  <%= hidden_field_tag :id, @station.id %>
+  &nbsp;&nbsp;<%= submit_tag 'Search' %>
+  </form><br>
+  <% if @entrant_on_deck != nil %>
+    <div style='margin-left:50px'>
+      Name : <%= link_to @entrant_on_deck.entrant_string, @entrant_on_deck %><br>
+      <table>
+        <tr>
+        <th>Time</th>
+        <th>Speed</th>
+        </tr>
+        <% @entrant_on_deck.trap_speeds.find(:all, :order => 'capture_time DESC', :limit => 5).each do |r| %>
+          <tr><td><%= r.capture_time_to_short_timestamp %></td><td><%= r.show_speed(current_user) %></td></tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>
 
-<p>
-  <b>Trap 4 name:</b>
-  <%= @station.trap_4_name %>
-</p>
 
 
-<%= link_to 'Edit', edit_station_path(@station) %> |
-<%= link_to 'Back', stations_path %>
+
+
+<% if current_user != nil and current_user.authorized?(:edit_stations) %>
+  <%= link_to 'Edit', edit_station_path(@station) %> |
+<% end %>
+<% if current_user != nil and current_user.authorized?(:data_entry) %>
+  <%= link_to 'Back', stations_path %>
+<% end %>

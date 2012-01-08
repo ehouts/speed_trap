@@ -1,0 +1,35 @@
+<%= Time.now %> <br>
+<% default_entrant_id = String.new %>
+<% default_entrant_id = @entrant_on_deck.id if @entrant_on_deck != nil %>
+<% if @trap_speeds == nil %>
+  No Data Found
+<% else %>
+  
+  <% @trap_speeds.each do |ts| %>
+    <%= form_tag '/update_run_data', :remote => true, :'data-update-target' => 'trap_1_div'  %>
+      Capture Time : <%= ts.capture_time_to_timestamp %> <br />
+      &nbsp;&nbsp;Speed : <%= ts.speed %> MPH &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;Vehicle # : <%= select_tag "entrant_id",
+                          options_for_select(event_entrants.collect {|e| ["#{e.entrant_string}", e.id] }, default_entrant_id ), { :include_blank => true } %>
+      &nbsp;&nbsp;&nbsp;<label>
+        <span title="This will mark this entry as invalid, and it will not be associated with a run"><%= check_box_tag 'mark_invalid' %> Invalid</span>
+      </label>
+      &nbsp;&nbsp;&nbsp;<label>
+        <span title="This will mark this entry as a DNF"><%= check_box_tag 'force_dnf' %> DNF</span>
+      </label>
+       <%= hidden_field_tag :trap_speed_id, ts.id %>
+       <%= hidden_field_tag :id, @station.id %>
+       <%= hidden_field_tag :trap_num, @trap_num %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag 'Commit' %>
+    </form><br />
+  <% end %>
+<% end %>
+
+
+  <script type="text/javascript">
+if ( updateTrap1Id != 0 ) {
+  // clear the interval that is setup below or it'll keep adding checks
+  clearInterval(updateTrap1Id);
+}
+updateTrap1Id = setInterval("updateTrap1('<%= @station.id %>', '<%= @trap_num %>', '<%= default_entrant_id %>')", <%= @update_interval.to_i %>);
+  </script>

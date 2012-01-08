@@ -25,6 +25,7 @@
 //-->
   
 </script>
+  <%= javascript_include_tag "jquery.js" %>
 </head>
 <body>
 
@@ -42,9 +43,9 @@
 <% if current_event != nil %>
   <font class="menu categories">Event Data</font>
   <ul class="menu flt">
-    <li><%= link_to 'Live Data', "" %></li>
-    <li><%= link_to 'Fastest 10', "" %></li>
-    <li><%= link_to 'All Participant Times', "" %></li>
+    <li><%= link_to 'Live Data', url_for("/live_data?data_type=live") %></li>
+    <li><%= link_to 'Fastest Overall', url_for("/live_data?data_type=fastest_overall") %></li>
+    <!-- li><%= link_to 'All Participant Times', "" %></li -->
     <li><%= link_to 'Entrants', entrants_path %></li>
   </ul>
 <% end %>

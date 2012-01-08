@@ -1,9 +1,67 @@
 class TrapSpeedsController < ApplicationController
-  before_filter do |c|
+  before_filter :except => :submit_speed_data do |c|
     c.send(:user_authorized?, :edit_trap_speeds)
   end
 
   before_filter :event_selected? 
+
+  def update_live_data
+    @trap_speeds = Array.new
+    @data_type = 'live'
+    @data_type = params[:data_type] if params.has_key?(:data_type)
+    if @data_type == 'live'
+      @trap_speeds = current_event.trap_speeds.find(:all, :conditions => "entrant_id is NOT NULL", :order => "capture_time DESC", :limit => 10)
+    elsif @data_type == 'fastest_overall'
+      temp_speeds = current_event.trap_speeds.find(:all, :conditions => "entrant_id is NOT NULL", :order => "speed DESC")
+      entrant_ids = Array.new
+      temp_speeds.each do |ts|
+        next if entrant_ids.include?(ts.entrant.id)
+        @trap_speeds.push(ts)
+        entrant_ids.push(ts.entrant.id)
+      end
+    end   
+    
+    render :partial => 'update_live_data', :content_type => 'text/html'
+  end
+
+  # ?time_data=123456789&speed_data=152.5&scode=1&trapid=1m
+  def submit_speed_data
+    if ! params.has_key?(:scode) or ! params.has_key?(:time_data) or
+              ! params.has_key?(:speed_data) or params[:scode] !~ /^[A-Z0-9]+$/ or
+              params[:time_data].sub(/^([0-9]+)$/, '\1').length > 10 or
+              ! params.has_key?(:trapid)
+        render :xml => "ERROR:::Invalid input"
+      return
+    end
+
+    station = Station.find(:first, :conditions => "station_code = '#{params[:scode]}'")
+    if station == nil
+      render :xml => "ERROR"
+      return
+    end
+
+    time_data = params[:time_data].to_i
+    speed_data = params[:speed_data].to_f
+    
+    trap_speed = TrapSpeed.new(:event_id => current_event.id,
+                               :station_id => station.id,
+                               :entrant_id => nil,
+                               :trapid => nil,
+                               :trap_num => nil,
+                               :dup_flag => false,
+                               :official_flag => false,
+                               :invalid_flag => false,
+                               :speed => speed_data,
+                               :capture_time => time_data)
+    if !trap_speed.save
+      render :xml => "SAVE_ERROR"
+      return
+    end
+
+    trap_speed.station.order_data trap_speed
+    
+    render :xml => "OK"
+  end
 
   # GET /trap_speeds
   # GET /trap_speeds.json

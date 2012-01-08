@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <b>Name:</b>
+  <h1>Name:
   <%= @entrant.name %>
+  </h1>
 </p>
 
 <p>
@@ -10,15 +9,17 @@
   <%= @entrant.event.name %>
 </p>
 
-<p>
-  <b>Email:</b>
-  <%= @entrant.email %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @entrant.phone %>
-</p>
+<% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+  <p>
+	<b>Email:</b>
+	<%= @entrant.email %>
+  </p>
+  
+  <p>
+	<b>Phone:</b>
+	<%= @entrant.phone %>
+  </p>
+<% end %>
 
 <p>
   <b>Number:</b>
@@ -27,7 +28,7 @@
 
 <p>
   <b>Vehicle class:</b>
-  <%= @entrant.vehicle_class_id %>
+  <%= @entrant.vehicle_class.print_name %>
 </p>
 
 <p>
@@ -45,6 +46,45 @@
   <%= @entrant.vehicle_color %>
 </p>
 
+<% if @entrant.event.award_speed != 999 %>
+  <p>
+	<b>Previously recieved <%= @entrant.event.award_speed %> MPH Award :</b> <%= @entrant.past_award_speed ? "Yes" : "No" %>
+  </p>
 
-<%= link_to 'Edit', edit_entrant_path(@entrant) %> |
+  <p>
+	<b>Up for <%= @entrant.event.award_speed %> MPH Award : </b> <%= @entrant.eligible_for_speed_award? ? "Yes" : "No" %>
+  </p>
+<% end %>
+
+<% top_speed = @entrant.top_speed %>
+<h1>Top Speed : <%= top_speed %></h1>
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Speed (MPH)</th>
+  </tr>
+<% @entrant.trap_speeds.sort {|a,b| a.capture_time <=> b.capture_time }.each do |trap_speed| %>
+  <tr>
+	<% if trap_speed.speed == top_speed %><b>
+	  <td style="background-color:lightgreen;font-size:larger">
+	<% else %>
+	  <td>
+	<% end %>
+	  <%= trap_speed.capture_time_to_short_timestamp %>
+	</td>
+	<% if trap_speed.speed == top_speed %><b>
+	  <td style="background-color:lightgreen;font-size:larger">
+	<% else %>
+	  <td>
+	<% end %>
+	  <%= trap_speed.show_speed(current_user) %>
+	</td>
+  </tr>
+<% end %>
+</table>
+
+
+<% if current_user != nil and current_user.authorized?(:data_entry) %>
+  <%= link_to 'Edit', edit_entrant_path(@entrant) %> |
+<% end %>
 <%= link_to 'Back', entrants_path %>

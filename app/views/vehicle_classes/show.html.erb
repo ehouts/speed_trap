@@ -1,20 +1,21 @@
-<p id="notice"><%= notice %></p>
+<h1>Class : <%= @vehicle_class.name %> <%= @vehicle_class.max_speed.to_s + " MPH" if @vehicle_class.name !~ /MPH/ %></h1>
+<%= link_to "Individual Best", url_for("/vehicle_classes/#{@vehicle_class.id}?display_type=fastest_run") %> | 
+<%= link_to "All By Fastest", url_for("/vehicle_classes/#{@vehicle_class.id}") %> | 
+<%= link_to "By Run Time", url_for("/vehicle_classes/#{@vehicle_class.id}?display_type=by_run_time") %>
+<table>
+  <tr>
+	<th>Entrant</th>
+	<th>Run Time</th>
+	<th>Speed</th>
+  </tr>
+  <% @trap_speeds.each do |ts| %>
+  <tr>
+	<td><%= link_to ts.entrant.entrant_string, ts.entrant %></td>
+	<td><%= ts.capture_time_to_short_timestamp %></td>
+	<td><%= ts.speed %> MPH</td>
+  </tr>
+  
+  <% end %>
+</table>
 
-<p>
-  <b>Event:</b>
-  <%= @vehicle_class.event_id %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @vehicle_class.name %>
-</p>
-
-<p>
-  <b>Max speed:</b>
-  <%= @vehicle_class.max_speed %>
-</p>
-
-
-<%= link_to 'Edit', edit_vehicle_class_path(@vehicle_class) %> |
 <%= link_to 'Back', vehicle_classes_path %>

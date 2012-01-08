@@ -4,9 +4,13 @@ class CreateTrapSpeeds < ActiveRecord::Migration
       t.integer :event_id
       t.integer :station_id
       t.integer :entrant_id
-      t.time :capture_time
+      t.integer :trapid # the sensor id of the trap
+      t.integer :trap_num # the trap # in the station
+      t.decimal :capture_time, :precision => 16, :scale => 0
       t.boolean :official_flag
-      t.integer :trap_number
+      t.boolean :dup_flag
+      t.boolean :invalid_flag
+      t.decimal :speed, :precision => 16, :scale => 5
 
       t.timestamps
     end
