@@ -12,6 +12,19 @@ class StationsController < ApplicationController
     trap_num = params[:trap_num]
     trap_speed = TrapSpeed.find(params[:trap_speed_id])
 
+    entrant = nil
+    if params.has_key?(:vehicle_number)
+      entrant = Entrant.find(:first, :conditions => "number = '#{params[:vehicle_number]}'")
+    elsif params.has_key?(:entrant_id)
+      entrant = Entrant.find(params[:entrant_id])
+    end
+
+    if entrant == nil
+      flash[:error] = "I can't find that number"
+      redirect_to @station
+      return
+    end
+
     invalid_flag = false
     invalid_flag = true if params.has_key?(:mark_invalid)
     official_flag = true
@@ -30,7 +43,7 @@ class StationsController < ApplicationController
     trap_speed.trapid = @station.trapid_2 if trap_num.to_i == 2
     trap_speed.trapid = @station.trapid_3 if trap_num.to_i == 3
     trap_speed.trapid = @station.trapid_4 if trap_num.to_i == 4
-    trap_speed.entrant_id = params[:entrant_id].to_i
+    trap_speed.entrant_id = entrant.id
     trap_speed.entrant_id = nil if invalid_flag
     if ! trap_speed.save
       flash[:error] = "Error - unable to save trap speed"

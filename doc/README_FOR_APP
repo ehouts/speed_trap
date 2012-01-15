@@ -1,3 +1,36 @@
+RVM install :
+cd
+mkdir rvm
+cd rvm
+curl -s https://rvm.beginrescueend.com/install/rvm -o rvm-installer ; chmod +x rvm-installer ;
+sudo -s
+yum install git
+
+./rvm-installer --version latest
+ echo '[[ -s "/usr/local/rvm/scripts/rvm" ]] && . "/usr/local/rvm/scripts/rvm" # Load RVM function' >> /etc/bashrc
+source /etc/bashrc
+
+type rvm | head -1 # If installation worked it should output 'rvm is a function'
+
+
+rvm install 1.9.2
+-- if you need 1.8.7
+Now Install Ruby (keep doing this as root). NOTE : some versions you need to use 'pkg' instead of 'package'. rvm usage is wrong in these cases.
+
+rvm package install openssl
+rvm install 1.8.6 --with-openssl-dir=/usr/local/rvm/usr
+
+rvm package install readline
+rvm install 1.8.7 --with-readline-dir=$rvm_path/usr
+rvm --default use 1.8.7
+
+echo 'gem: --no-rdoc --no-ri' > /etc/gemrc #this makes gems install much faster
+gem install bundler
+
+
+--------------------------- end rvm install -----------------------------------------------
+
+
 -- if a javascript runtime is reported as not present, try and load v8 javascript runtime:
 irb
 require 'v8'
