@@ -25,6 +25,11 @@ rvm install 1.8.7 --with-readline-dir=$rvm_path/usr
 rvm --default use 1.8.7
 
 echo 'gem: --no-rdoc --no-ri' > /etc/gemrc #this makes gems install much faster
+
+sudo yum install mysql mysql-server mysql-devel
+-- nokogiri doesn't install correctly unless you do this first:
+sudo yum install libxml2 libxml2-devel libxslt libxslt-devel
+sudo yum install -y rubygem-nokogiri
 gem install bundler
 
 
@@ -42,6 +47,18 @@ sudo setsebool -P allow_execmod=1
 D:\time_apps\TimeKeeper.with_speed_trap\TimeKeeper>cscript web_insert.vbs 1234567890 152.8
 
 git commands:
+create ssh keys -
+cd ~/.ssh
+ssh-keygen -t rsa -C "ehouts@pacbell.net"
+-- for key name, enter 'github-speed_trap'
+-- no passphrase
+Log into github, click on the speed_trap project, and add the generated key
+
+To checkout the project:
+cd /usr/local/rails_apps
+git clone git@github.com:ehouts/speed_trap.git
+-- you'll need to copy config/database.yml and db/seeds.db front an existing configuration
+
 .gitignore has files to not check into git
 git init
 git add .
