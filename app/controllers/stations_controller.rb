@@ -19,7 +19,7 @@ class StationsController < ApplicationController
       entrant = Entrant.find(params[:entrant_id])
     end
 
-    if entrant == nil
+    if entrant == nil and ! params.has_key?(:mark_invalid)
       flash[:error] = "I can't find that number"
       redirect_to @station
       return
@@ -43,7 +43,7 @@ class StationsController < ApplicationController
     trap_speed.trapid = @station.trapid_2 if trap_num.to_i == 2
     trap_speed.trapid = @station.trapid_3 if trap_num.to_i == 3
     trap_speed.trapid = @station.trapid_4 if trap_num.to_i == 4
-    trap_speed.entrant_id = entrant.id
+    trap_speed.entrant_id = entrant.id if entrant != nil
     trap_speed.entrant_id = nil if invalid_flag
     if ! trap_speed.save
       flash[:error] = "Error - unable to save trap speed"

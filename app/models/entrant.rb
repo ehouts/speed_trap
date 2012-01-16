@@ -22,7 +22,7 @@ class Entrant < ActiveRecord::Base
   end
   
   def eligible_for_speed_award?
-	return true if ! self.past_award_speed and self.top_speed > self.event.award_speed
+	return true if ! self.past_award_speed and self.top_speed != nil and self.top_speed > self.event.award_speed
 	return false
   end
 end
