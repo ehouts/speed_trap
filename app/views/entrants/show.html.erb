@@ -87,4 +87,7 @@
 <% if current_user != nil and current_user.authorized?(:data_entry) %>
   <%= link_to 'Edit', edit_entrant_path(@entrant) %> |
 <% end %>
+<% if current_user != nil and current_user.authorized?(:edit_entrants) %>
+  <%= link_to 'New Entrant', new_entrant_path %> |
+<% end %>
 <%= link_to 'Back', entrants_path %>

@@ -67,13 +67,14 @@ function updateTrap1Pending(stationid, trapnum) {
 
 <div id='on_deck_div'>
   <%= form_tag "/update_on_deck", :remote => true  %>
-  &nbsp;&nbsp;Vehicle # On Deck: <%= text_field_tag "on_deck_entrant", default_entrant_number, :size => 15 %>
+  <h2>On Deck</h2>
+  &nbsp;&nbsp;Vehicle # : <%= text_field_tag "on_deck_entrant", default_entrant_number, { :size => 7 } %>
   <%= hidden_field_tag :id, @station.id %>
   &nbsp;&nbsp;<%= submit_tag 'Search' %>
   </form><br>
   <% if @entrant_on_deck != nil %>
     <div style='margin-left:50px'>
-      Name : <%= link_to @entrant_on_deck.entrant_string, @entrant_on_deck %><br>
+      <b style='font-size:larger'>Name : <%= link_to @entrant_on_deck.entrant_string, @entrant_on_deck %></b><br>
       <table>
         <tr>
         <th>Time</th>

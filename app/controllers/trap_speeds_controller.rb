@@ -16,6 +16,7 @@ class TrapSpeedsController < ApplicationController
       entrant_ids = Array.new
       temp_speeds.each do |ts|
         next if entrant_ids.include?(ts.entrant.id)
+        next if ts.speed > ts.entrant.vehicle_class.max_speed
         @trap_speeds.push(ts)
         entrant_ids.push(ts.entrant.id)
       end

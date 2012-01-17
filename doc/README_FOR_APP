@@ -45,6 +45,8 @@ sudo setsebool -P allow_execmod=1
 
 -- submitting data :
 D:\time_apps\TimeKeeper.with_speed_trap\TimeKeeper>cscript web_insert.vbs 1234567890 152.8
+or
+http://localhost:3000/submit_speed_data?time_data=123466789&speed_data=152.5&scode=1&trapid=1
 
 git commands:
 create ssh keys -

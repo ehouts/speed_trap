@@ -17,6 +17,7 @@ class TrapSpeed < ActiveRecord::Base
 	if self.speed == nil
 	  return "INVALID"
 	end
+#logger.info "speed = #{self.speed}, max = #{self.entrant.vehicle_class.max_speed}"
 	if self.speed > self.entrant.vehicle_class.max_speed.to_f or self.force_dnf
 	  if current_user != nil and current_user.authorized?(:data_entry)
 		return "DNF : #{self.speed}"

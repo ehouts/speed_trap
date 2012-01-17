@@ -10,11 +10,11 @@
   <% @trap_speeds.each do |ts| %>
     <%= form_tag '/update_run_data', :remote => true, :'data-update-target' => 'trap_1_div'  %>
       Capture Time : <%= ts.capture_time_to_timestamp %> <br />
-      &nbsp;&nbsp;Speed : <%= ts.speed %> MPH &nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;Vehicle # : <!-- select_tag "entrant_id",
                           options_for_select(event_entrants.collect {|e| ["#{e.entrant_string}", e.id] }, default_entrant_id ), { :include_blank => true } -->
-                          <%= text_field_tag 'vehicle_number', default_entrant_number %>
-      &nbsp;&nbsp;&nbsp;<label>
+                          <%= text_field_tag 'vehicle_number', default_entrant_number, { :size => 7 } %>
+      &nbsp;&nbsp;Speed : <b style='font-size:larger;color:darkblue'><%= ts.speed %> MPH</b> &nbsp;&nbsp;&nbsp;
+      &nbsp;<label>
         <span title="This will mark this entry as invalid, and it will not be associated with a run"><%= check_box_tag 'mark_invalid' %> Invalid</span>
       </label>
       &nbsp;&nbsp;&nbsp;<label>

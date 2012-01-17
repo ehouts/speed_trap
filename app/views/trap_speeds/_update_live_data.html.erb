@@ -12,7 +12,7 @@
     <td><%= trap_speed.station.name %></td>
     <td><%= link_to(trap_speed.entrant.entrant_string, trap_speed.entrant) if trap_speed.entrant != nil %></td>
     <td><%= link_to trap_speed.entrant.vehicle_class.print_name, trap_speed.entrant.vehicle_class %></td>
-    <td><%= trap_speed.speed %></td>
+    <td><%= trap_speed.show_speed(current_user) %></td>
     <td><%= trap_speed.capture_time_to_short_timestamp %></td>
   </tr>
 <% end %>
