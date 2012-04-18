@@ -5,7 +5,7 @@ class VehicleClass < ActiveRecord::Base
   validates :name, :uniqueness => { :scope => [:event_id] }
   
   def print_name
-    return "#{self.name} : #{self.max_speed} MPH" if self.name !~ /MPH/
+    #return "#{self.name} : #{self.max_speed} MPH" if self.name !~ /MPH/ and self.max_speed !=nil and self.max_speed > 0
     return self.name
   end
 end
