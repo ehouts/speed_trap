@@ -32,7 +32,7 @@ class TrapSpeedsController < ApplicationController
               params[:time_data].sub(/^([0-9]+)$/, '\1').length < 10 or
 	       params[:time_data].sub(/^([0-9]+)$/, '\1').length > 13 or
               ! params.has_key?(:trapid)
-logger.info "ERROR - could not complete submission - #{params.inspect}"
+logger.info "ERROR - could not complete submission - #{params.inspect}, #{params[:time_data].length}"
         render :xml => "ERROR:::Invalid input"
       return
     end

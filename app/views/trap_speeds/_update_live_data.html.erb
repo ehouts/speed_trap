@@ -5,6 +5,7 @@
     <th>Class</th>
     <th>Speed (MPH)</th>
     <th>Time</th>
+    <th>Comment</th>
   </tr>
 
 <% @trap_speeds.each do |trap_speed| %>
@@ -14,6 +15,7 @@
     <td><%= link_to trap_speed.entrant.vehicle_class.print_name, trap_speed.entrant.vehicle_class %></td>
     <td><%= trap_speed.show_speed(current_user) %></td>
     <td><%= trap_speed.capture_time_to_short_timestamp %></td>
+    <td><%= trap_speed.comment %></td>
   </tr>
 <% end %>
 </table>

@@ -14,6 +14,7 @@
                           options_for_select(event_entrants.collect {|e| ["#{e.entrant_string}", e.id] }, default_entrant_id ), { :include_blank => true } -->
                           <%= text_field_tag 'vehicle_number', default_entrant_number, { :size => 7 } %>
       &nbsp;&nbsp;Speed : <b style='font-size:larger;color:darkblue'><%= ts.speed %> MPH</b> &nbsp;&nbsp;&nbsp;
+      <label><span title="Comment Field"><%= text_field_tag 'comment', "", { :size => 10 } %></label>
       &nbsp;<label>
         <span title="This will mark this entry as invalid, and it will not be associated with a run"><%= check_box_tag 'mark_invalid' %> Invalid</span>
       </label>

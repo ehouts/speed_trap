@@ -32,6 +32,8 @@ class StationsController < ApplicationController
     dup_flag = false
     dnf_flag = false
     dnf_flag = true if params.has_key?(:force_dnf)
+    comment = String.new
+    comment = params[:comment] if params.has_key?(:comment)
 
     trap_speed.station_id = @station.id
     trap_speed.invalid_flag = invalid_flag
@@ -39,6 +41,7 @@ class StationsController < ApplicationController
     trap_speed.dup_flag = dup_flag
     trap_speed.trap_num = trap_num
     trap_speed.force_dnf = dnf_flag
+    trap_speed.comment = comment
     trap_speed.trapid = @station.trapid_1 if trap_num.to_i == 1
     trap_speed.trapid = @station.trapid_2 if trap_num.to_i == 2
     trap_speed.trapid = @station.trapid_3 if trap_num.to_i == 3

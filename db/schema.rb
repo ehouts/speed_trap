@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108030506) do
+ActiveRecord::Schema.define(:version => 20120418021222) do
 
   create_table "entrants", :force => true do |t|
     t.string   "name"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120108030506) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "force_dnf",                                    :default => false
+    t.string   "comment"
   end
 
   add_index "trap_speeds", ["event_id", "station_id", "entrant_id"], :name => "index_trap_speeds_on_event_id_and_station_id_and_entrant_id"
