@@ -1,5 +1,5 @@
 class TrapSpeedsController < ApplicationController
-  before_filter :except => :submit_speed_data do |c|
+  before_filter :except => [:update_live_data, :submit_speed_data] do |c|
     c.send(:user_authorized?, :edit_trap_speeds)
   end
 
