@@ -10,7 +10,8 @@ class EntrantsController < ApplicationController
   def index
     event_id = current_event.id
     event_id = params[:event_id] if params.has_key?(:event_id)
-    @entrants = Entrant.all(:conditions => "event_id = #{event_id}")
+    @entrants = Entrant.all(:conditions => "event_id = #{event_id}",
+                            :order => "number ASC")
 
     respond_to do |format|
       format.html # index.html.erb

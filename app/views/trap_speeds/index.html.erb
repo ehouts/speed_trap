@@ -22,7 +22,7 @@
     <% if current_user != nil and current_user.authorized?(:data_entry) %>
       <td><%= link_to 'Show', trap_speed %></td>
       <td><%= link_to 'Edit', edit_trap_speed_path(trap_speed) %></td>
-      <td><%= link_to 'Destroy', trap_speed, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%= link_to 'Destroy', trap_speed, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>

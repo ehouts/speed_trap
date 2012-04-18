@@ -19,7 +19,7 @@
     <% end %>
   </tr>
 
-<% @entrants.sort { |a,b| a.number <=> b.number }.each do |entrant| %>
+<% @entrants.each do |entrant| %>
   <tr>
     <td><%= link_to entrant.name, entrant %></td>
     <% if current_user != nil and current_user.authorized?(:edit_entrants) %>
