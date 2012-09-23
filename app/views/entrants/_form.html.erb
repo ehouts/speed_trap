@@ -32,7 +32,7 @@
     <%= f.text_field :number %>
   </div>
   <div class="field">
-    <%= f.label :event %><br />
+    <%= f.label :vehicle_class %><br />
     <%= select("entrant", "vehicle_class_id", VehicleClass.all(:conditions => "event_id = #{current_event.id}", :order => "max_speed ASC").collect {|vc| [vc.print_name, vc.id]} ) %>
   </div>
   <div class="field">
