@@ -22,7 +22,7 @@ function updateTrap1(stationid, trapnum, ondeck) {
       });
 }
 updateTrap1Pending("<%= @station.id %>", "<%= trap_num %>");
-setInterval("updateTrap1Pending('<%= @station.id %>', '<%= trap_num %>')", 5000);
+setInterval("updateTrap1Pending('<%= @station.id %>', '<%= trap_num %>')", 15000);
 function updateTrap1Pending(stationid, trapnum) {
   $.get("/update_trap_pending?id=" + stationid + "&trap_num=" + trapnum,
       function(response) {
@@ -66,6 +66,9 @@ function updateTrap1Pending(stationid, trapnum) {
 <% end %>
 
 <div id='on_deck_div'>
+error : <%= flash[:error] %><br>
+<%= Time.now %>  <br>
+
   <%= form_tag "/update_on_deck", :remote => true  %>
   <h2>On Deck</h2>
   &nbsp;&nbsp;Vehicle # : <%= text_field_tag "on_deck_entrant", default_entrant_number, { :size => 7 } %>
@@ -87,8 +90,6 @@ function updateTrap1Pending(stationid, trapnum) {
     </div>
   <% end %>
 </div>
-
-
 
 
 

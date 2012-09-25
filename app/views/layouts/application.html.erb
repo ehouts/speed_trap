@@ -28,7 +28,7 @@
 //-->
   
 </script>
-  <%= stylesheet_link_tag :all %>
+  <!-- stylesheet_link_tag :all -->
 
   <%= javascript_include_tag "jquery.js" %>
   <%= javascript_include_tag "rails" %>
@@ -93,6 +93,7 @@
     <%= submit_tag 'Search for Car #' %>
   <% end %>
   <br />
+
   <% unless flash[:error].blank? %>
     <div id="errorExplanation"><%= flash[:error] %></div>
   <% end %>

@@ -21,7 +21,7 @@ class StationsController < ApplicationController
 
     if entrant == nil and ! params.has_key?(:mark_invalid)
       flash[:error] = "I can't find that number"
-      redirect_to @station
+      redirect_to @station, :error => flash[:error]
       return
     end
 
@@ -56,7 +56,7 @@ class StationsController < ApplicationController
     flash[:notice] = "Saved Trap Speed!"
     flash[:notice] = "Saved run as DNF" if dnf_flag
     @station.order_data(trap_speed)
-    redirect_to @station
+    redirect_to @station, :notice => flash[:notice]
     #trap_div = "trap_#{@trap_num}_div"
     #render :partial => 'update_trap', :content_type => 'text/html'
     #respond_to do |format|
@@ -96,7 +96,7 @@ class StationsController < ApplicationController
         flash[:error] = "Could not find entrant for vehicle # #{params[:on_deck_id]}"
       end
     end
-    @update_interval = 2500
+    @update_interval = 250000
     @update_interval = 300000 if @trap_speeds.length > 0
 logger.info "setting trap update to #{@update_interval}"
     render :partial => 'update_trap' #, :content_type => 'text/html'
@@ -105,17 +105,26 @@ logger.info "setting trap update to #{@update_interval}"
   # updates the trap div 
   def update_on_deck
     @station = Station.find(params[:id])
+logger.info "==============at start = #{params[:on_deck_entrant]}"
     if ! params.has_key?(:on_deck_entrant) or params[:on_deck_entrant].length < 1
+logger.info "============= INVALID param for entrant"
       redirect_to @station
       return
     end
     
     @entrant_on_deck = Entrant.find(:first, :conditions => "number = '#{params[:on_deck_entrant]}'")
+logger.info "entrant found = #{@entrant_on_deck}"
     if @entrant_on_deck == nil
       flash[:error] = "Could not find entrant for vehicle # #{params[:on_deck_entrant]}"
-      redirect_to @station
+logger.info "-=-=-=-=-=-=-=-=-=- !!!!!!!!!!! going to alert #{flash.inspect}"
+      #redirect_to station_path(@station), :error => "Could not find entrant for vehicle # #{params[:on_deck_entrant]}"
+redirect_to "/stations/#{@station.id}"
+#respond_to do |format|
+#  format.html { render action: "show" }
+#end
       return
     end
+logger.info "updating on deck entrant to #{@entrant_on_deck.id}"
     redirect_to "/stations/#{@station.id}?on_deck_entrant_id=#{@entrant_on_deck.id}"
   end
   
@@ -137,7 +146,7 @@ logger.info "setting trap update to #{@update_interval}"
   # GET /stations/1.json
   def show
     @station = Station.find(params[:id])
-
+logger.info "====-=-=-=-=-=-=-=- #{flash.inspect}"
     @entrant_on_deck = nil
     if params.has_key?(:on_deck_entrant_id) and params[:on_deck_entrant_id].length > 0
       # update the on deck data
@@ -146,9 +155,11 @@ logger.info "setting trap update to #{@update_interval}"
         flash[:error] = "Could not find entrant for vehicle # #{params[:on_deck_entrant]}"
       end
     end
-
+logger.info "HERE _+_+_+_+_+_+_+_+_+__+_+_+_+_+__+"
+logger.info "on deck entrant id = #{@entrant_on_deck.id}" if @entrant_on_deck != nil
+logger.info "NO on deck entrant" if @entrant_on_deck == nil
     respond_to do |format|
-      format.html # show.html.erb
+      format.html  # show.html.erb
       format.json { render json: @station }
     end
   end
